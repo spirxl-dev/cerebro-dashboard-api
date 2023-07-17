@@ -5,7 +5,7 @@ import os
 import psycopg2
 
 
-evieDBPass = os.environ.get("EvieDB")
+evieDBPass = os.environ.get("EvieDB") # run source ~/.bash_profile if complaining
 evieDBPass = evieDBPass[:5] + "`" + evieDBPass[5:]
 deniseDBPass = os.environ.get("DeniseDB")
 
@@ -104,58 +104,12 @@ def pollEvie2ups():
     cur.close()
     conn.close()
     
-
-    # Method connects to DB
-    # DB returns json file like above
-    # Method outputs json
-
-    example_json = {
-    "bot": "Evie2UPs",
-    "components": [
-        {   
-            "componentName": "skyScraper1", 
-            "status": "Green", 
-            "info": "null"},
-        {
-            "componentName": "paddyScraper1",
-            "status": "Orange",
-            "info": "Last poll was 45 secs",
-        },
-        {
-            "componentName": "botPoller1",
-            "status": "Red",
-            "info": "Missing bet365 odds",
-        },
-    ],
-    }
     return newComponentsDict#["components"]
 
 
 def pollDenise():
     conn = connectToDB('postgres', 'postgres', 'dh-new-database', deniseDBPass)
 
-
-
-
-example_json = {
-    "bot": "Evie2UPs",
-    "components": [
-        {   
-            "componentName": "skyScraper1", 
-            "status": "Green", 
-            "info": "null"},
-        {
-            "componentName": "paddyScraper1",
-            "status": "Orange",
-            "info": "Last poll was 45 secs",
-        },
-        {
-            "componentName": "botPoller1",
-            "status": "Red",
-            "info": "Missing bet365 odds",
-        },
-    ],
-}
 
 
 newComponentsDict = pollEvie2ups()
