@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
 from starlette.responses import RedirectResponse
-from functions import pollEvie2ups
+from functions import pollEvie2ups, pollEvieEW
 
 
 app = FastAPI()
@@ -14,8 +14,15 @@ async def docs_redirect():
 
 @app.get("/evie-2ups-status")
 async def get2upsStatus():
-    data = pollEvie2ups()
-    return data
+
+    twoUps_status_data = pollEvie2ups()
+    return twoUps_status_data
+
+
+@app.get("/evie-ew-status")
+async def getEwStatus():
+    ew_status_data = pollEvieEW()
+    return ew_status_data
 
 
 if __name__ == "__main__":
