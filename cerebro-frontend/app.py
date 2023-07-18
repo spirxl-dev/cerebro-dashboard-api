@@ -46,14 +46,19 @@ def service_status_tile(name, status, totalRowTiles, info):
     # Adding dropdown component with custom CSS class
     dropdown = dbc.DropdownMenu(
         label=name,
-        children=[
-            dbc.DropdownMenuItem(info),
+        menu_variant="dark",
+        size="lg",
+        toggle_style={
+        "textTransform": "uppercase",
+        "background": status,
+    }  ,
+        children=[dbc.DropdownMenuItem(i) for i in info.split('\n')
         ],
         direction="right",
         in_navbar=False,
     )
 
-    return html.Div([dropdown, tile])
+    return html.Div([dropdown])
 
 
 def BotStatusDiv(info_dict):
@@ -131,4 +136,4 @@ def update_2ups_data(n):
 
 
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True, host='0.0.0.0')
